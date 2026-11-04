@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f4">
+    <meta name="description" content="Search current second-hand product prices from USED PRODUCTS Romania.">
+    <title>Secondhand Price Index — USED PRODUCTS</title>
+    <link rel="preconnect" href="https://usedproducts.ro">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Price Index home">
+          <span class="brand-mark" aria-hidden="true">up</span>
+          <span>PRICE INDEX<span class="brand-dot">.</span></span>
+        </a>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="#all-price-drops">Price drops <span id="menu-drop-count" class="nav-count">0</span></a>
+          <a href="#catalog">Catalog</a>
+        </nav>
+        <div class="topbar-note"><span class="status-dot"></span> LIVE CATALOG</div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">A smarter way to browse secondhand</p>
+            <h1>Good finds.<br><span>Clear prices.</span></h1>
+            <p class="hero-description">Explore the latest products and prices from USED PRODUCTS Romania, all in one place.</p>
+          </div>
+          <div class="hero-aside" aria-label="Catalog summary">
+            <div class="hero-icon" aria-hidden="true">↘</div>
+            <span>THE EVERYDAY<br>PRICE CHECK</span>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong id="product-count">—</strong><span>products indexed</span></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><strong id="updated-at">Loading</strong><span>last updated</span></div>
+            <a class="source-link" href="https://usedproducts.ro/produse" target="_blank" rel="noopener noreferrer">Visit store <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+          <section class="deals-section" aria-labelledby="deals-title">
+            <div class="section-heading deals-heading">
+              <div>
+                <p class="eyebrow">Tracked against recent prices</p>
+                <h2 id="deals-title">Top price drops<span class="brand-dot">.</span></h2>
+              </div>
+              <span class="period-label">LAST 30 DAYS</span>
+            </div>
+            <div id="price-drop-grid" class="drop-grid"></div>
+            <p id="drop-empty" class="drop-empty" hidden>No price drops recorded yet. Changes will appear here as new feed prices are saved.</p>
+          </section>
+
+          <section id="all-price-drops" class="all-drops-section" aria-labelledby="all-drops-title">
+            <div class="section-heading all-drops-heading">
+              <div>
+                <p class="eyebrow">Complete tracked list</p>
+                <h2 id="all-drops-title">All price drops<span class="brand-dot">.</span></h2>
+              </div>
+              <span id="all-drops-total" class="period-label">0 PRODUCTS</span>
+            </div>
+            <div class="drop-toolbar">
+              <label class="search-box">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <span class="sr-only">Search price drops</span>
+                <input id="price-drop-search" type="search" placeholder="Search discounted products..." autocomplete="off">
+              </label>
+              <label class="select-wrap">
+                <span class="sr-only">Filter price drops by category</span>
+                <select id="price-drop-category"><option value="">All categories</option></select>
+                <span class="select-chevron" aria-hidden="true">⌄</span>
+              </label>
+            </div>
+            <p id="all-drops-count" class="all-drops-count" aria-live="polite"></p>
+            <div id="all-price-drop-grid" class="drop-grid"></div>
+            <button id="load-more-drops" class="load-more" type="button" hidden>Show more price drops</button>
+            <p id="all-drops-empty" class="drop-empty" hidden>No products currently have a recorded price drop in the last 30 days.</p>
+          </section>
+
+          <section id="catalog" class="catalog" aria-labelledby="catalog-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Browse the collection</p>
+              <h2 id="catalog-title">Product catalog<span class="brand-dot">.</span></h2>
+            </div>
+            <button id="update-button" class="refresh-button" type="button" title="Check the public feed and save price changes">
+              <span class="refresh-icon" aria-hidden="true">↻</span> Update prices
+            </button>
+          </div>
+          <p id="sync-status" class="sync-status" aria-live="polite"></p>
+
+          <div class="toolbar">
+            <label class="search-box">
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <span class="sr-only">Search products</span>
+              <input id="search-input" type="search" placeholder="Search products, brands, models..." autocomplete="off">
+              <kbd>/</kbd>
+            </label>
+            <label class="select-wrap">
+              <span class="sr-only">Filter by category</span>
+              <select id="category-filter"><option value="">All categories</option></select>
+              <span class="select-chevron" aria-hidden="true">⌄</span>
+            </label>
+            <label class="select-wrap">
+              <span class="sr-only">Filter by store location</span>
+              <select id="location-filter"><option value="">All locations</option></select>
+              <span class="select-chevron" aria-hidden="true">⌄</span>
+            </label>
+            <label class="select-wrap sort-select">
+              <span class="sr-only">Sort products</span>
+              <select id="sort-select">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="name-asc">Name: A to Z</option>
+              </select>
+              <span class="select-chevron" aria-hidden="true">⌄</span>
+            </label>
+          </div>
+
+          <div class="results-line">
+            <p id="results-count" aria-live="polite">Loading products…</p>
+            <p class="currency-note">Prices shown in <strong>RON</strong></p>
+          </div>
+
+          <div id="product-grid" class="product-grid" aria-live="polite"></div>
+          <button id="load-more" class="load-more" type="button" hidden>Show more products</button>
+          <div id="message-state" class="message-state" hidden></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Product details and prices are provided by the public USED PRODUCTS Romania feed and may change.</p>
+        <a href="https://usedproducts.ro" target="_blank" rel="noopener noreferrer">usedproducts.ro <span aria-hidden="true">↗</span></a>
+      </footer>
+    </div>
+  </body>
+</html>
